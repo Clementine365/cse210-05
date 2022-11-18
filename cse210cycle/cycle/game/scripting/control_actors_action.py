@@ -7,7 +7,7 @@ class ControlActorsAction(Action):
     """
     An input action that controls the snake.
     
-    The responsibility of ControlActorsAction is to get the direction and move the snake's head.
+    The responsibility of ControlActorsAction is to get the direction and move the player's head.
 
     Attributes:
         _keyboard_service (KeyboardService): An instance of KeyboardService.
@@ -31,20 +31,20 @@ class ControlActorsAction(Action):
             cast (Cast): The cast of Actors in the game.
             script (Script): The script of Actions in the game.
         """
-        # left
+        # left for player1
         if self._keyboard_service.is_key_down('a'): 
             self._direction1 = Point(-constants.CELL_SIZE, 0)
             
         
-        # right
+        # right for player1
         if self._keyboard_service.is_key_down('d'):
             self._direction1 = Point(constants.CELL_SIZE, 0) 
                 
-        # up
+        # up for player1
         if self._keyboard_service.is_key_down('w'):
             self._direction1 = Point(0, -constants.CELL_SIZE)
         
-        # down
+        # down for player1
         if self._keyboard_service.is_key_down('s'):
             self._direction1 = Point(0, constants.CELL_SIZE)
         
@@ -52,19 +52,19 @@ class ControlActorsAction(Action):
         player1.turn_head(self._direction1)
 
     
-        # left
+        # left for player2
         if self._keyboard_service.is_key_down('j'): 
             self._direction2 = Point(-constants.CELL_SIZE, 0) 
 
-        # right
+        # right for player2
         if self._keyboard_service.is_key_down('l'):
             self._direction2 = Point(constants.CELL_SIZE, 0) 
 
-        # up
+        # up for player2
         if self._keyboard_service.is_key_down('i'):
             self._direction2 = Point(0, -constants.CELL_SIZE)
 
-        # down
+        # down for player2
         if self._keyboard_service.is_key_down('k'):
             self._direction2 = Point(0, constants.CELL_SIZE)
 

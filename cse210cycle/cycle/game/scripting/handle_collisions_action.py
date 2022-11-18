@@ -8,8 +8,8 @@ class HandleCollisionsAction(Action):
     """
     An update action that handles interactions between the actors.
     
-    The responsibility of HandleCollisionsAction is to handle the situation when the snake collides
-    with the food, or the snake collides with its segments, or the game is over.
+    The responsibility of HandleCollisionsAction is to handle the situation when the players collides
+    with the other player or with him or herself or the game is over.
 
     Attributes:
         _is_game_over (boolean): Whether or not the game is over.
@@ -32,8 +32,8 @@ class HandleCollisionsAction(Action):
 
     
     def _handle_segment_collision(self, cast):
-        """Sets the game over flag if the snake collides with one of its segments.
-        
+        """Sets the game over flag if the players collides with one of its segments or
+           collides with each other.
         Args:
             cast (Cast): The cast of Actors in the game.
         """
@@ -45,19 +45,20 @@ class HandleCollisionsAction(Action):
         head2 = player2.get_segments()[0]
         segment2 = player2.get_segments()[1:]
     
-        
+        # case of player1 collides with himself or with player2
         for segment in segment1:
             if head1.get_position().equals(segment.get_position()) \
                 or head2.get_position().equals(segment.get_position()):
                 self._is_game_over = True
 
+        # case of player2 collides with himself or with player1
         for segment in segment2:
             if head1.get_position().equals(segment.get_position()) \
                 or head2.get_position().equals(segment.get_position()):
                 self._is_game_over = True        
         
     def _handle_game_over(self, cast):
-        """Shows the 'game over' message and turns the snake and food white if the game is over.
+        """Shows the 'game over' message and turns the player1 and player2 white if the game is over.
         
         Args:
             cast (Cast): The cast of Actors in the game.
@@ -65,7 +66,6 @@ class HandleCollisionsAction(Action):
         if self._is_game_over:
             player1 = cast.get_first_actor("player1s")
             segment1 = player1.get_segments()
-            #food = cast.get_first_actor("foods")
 
             player2 = cast.get_first_actor("player2s")
             segment2 = player2.get_segments()
@@ -74,14 +74,16 @@ class HandleCollisionsAction(Action):
             y = int(constants.MAX_Y / 2)
             position = Point(x, y)
 
+            # game over message handling
             message = Actor1()
             message.set_text("Game Over!")
             message.set_position(position)
             cast.add_actor("messages", message)
 
+            # change player1 to be white
             for segment in segment1:
                 segment.set_color(constants.WHITE)
 
+            # change player2 to be white
             for segment in segment2:
-                segment.set_color(constants.WHITE)    
-            #food.set_color(constants.WHITE)
+                segment.set_color(constants.WHITE)   

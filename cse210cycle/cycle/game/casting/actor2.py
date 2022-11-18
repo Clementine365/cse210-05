@@ -6,7 +6,7 @@ from game.shared.point import Point
 class Actor2:
     """A visible, moveable thing that participates in the game. 
     
-    The responsibility of Actor is to keep track of its appearance, position and velocity in 2d 
+    The responsibility of Actor2 is to keep track of its appearance, position and velocity in 2d 
     space.
 
     Attributes:
@@ -18,7 +18,7 @@ class Actor2:
     """
 
     def __init__(self):
-        """Constructs a new Actor."""
+        """Constructs a new Actor2."""
         self._text = ""
         self._font_size = 15
         self._color = Color(255, 255, 255)
@@ -27,58 +27,62 @@ class Actor2:
 
 
     def copy(self):
-        """Make copy of an actor"""
-        copy1 = Actor2()
-        copy1._text = self._text
-        copy1._font_size = self._font_size
-        copy1._color = self._color
-        copy1._position = self._position
-        copy1._velocity = self._velocity 
-
-        return copy1   
-
-    def get_color(self):
-        """Gets the actor's color as a tuple of three ints (r, g, b).
+        """Make copy of an actor2
         
         Returns:
-            Color: The actor's text color.
+            copied: copied version of actor2
+        """
+        copied = Actor2()
+        copied._text = self._text
+        copied._font_size = self._font_size
+        copied._color = self._color
+        copied._position = self._position
+        copied._velocity = self._velocity 
+
+        return copied   
+
+    def get_color(self):
+        """Gets the actor2's color as a tuple of three ints (r, g, b).
+        
+        Returns:
+            Color: The actor2's text color.
         """
         return self._color
 
     def get_font_size(self):
-        """Gets the actor's font size.
+        """Gets the actor2's font size.
         
         Returns:
-            Point: The actor's font size.
+            Point: The actor2's font size.
         """
         return self._font_size
 
     def get_position(self):
-        """Gets the actor's position in 2d space.
+        """Gets the actor2's position in 2d space.
         
         Returns:
-            Point: The actor's position in 2d space.
+            Point: The actor2's position in 2d space.
         """
         return self._position
     
     def get_text(self):
-        """Gets the actor's textual representation.
+        """Gets the actor2's textual representation.
         
         Returns:
-            string: The actor's textual representation.
+            string: The actor2's textual representation.
         """
         return self._text
 
     def get_velocity(self):
-        """Gets the actor's speed and direction.
+        """Gets the actor2's speed and direction.
         
         Returns:
-            Point: The actor's speed and direction.
+            Point: The actor2's speed and direction.
         """
         return self._velocity
     
     def move_next(self):
-        """Moves the actor to its next position according to its velocity. Will wrap the position 
+        """Moves the actor2 to its next position according to its velocity. Will wrap the position 
         from one side of the screen to the other when it reaches the given maximum x and y values.
         
         Args:
