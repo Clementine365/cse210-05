@@ -3,6 +3,7 @@ from game.casting.actor1 import Actor1
 from game.casting.actor2 import Actor2
 from game.scripting.action import Action
 from game.shared.point import Point
+from game.shared.color import Color
 
 class HandleCollisionsAction(Action):
     """
@@ -18,6 +19,7 @@ class HandleCollisionsAction(Action):
     def __init__(self):
         """Constructs a new HandleCollisionsAction."""
         self._is_game_over = False
+        
 
     def execute(self, cast, script):
         """Executes the handle collisions action.
@@ -45,17 +47,29 @@ class HandleCollisionsAction(Action):
         head2 = player2.get_segments()[0]
         segment2 = player2.get_segments()[1:]
     
-        # case of player1 collides with himself or with player2
+        # case of player1 or 2 collides with himself 
         for segment in segment1:
-            if head1.get_position().equals(segment.get_position()) \
-                or head2.get_position().equals(segment.get_position()):
+            if head1.get_position().equals(segment.get_position()):
                 self._is_game_over = True
+               
+
+            if head2.get_position().equals(segment.get_position()):
+                self._is_game_over = True
+                   
 
         # case of player2 collides with himself or with player1
         for segment in segment2:
-            if head1.get_position().equals(segment.get_position()) \
-                or head2.get_position().equals(segment.get_position()):
-                self._is_game_over = True        
+            if head1.get_position().equals(segment.get_position()):
+                self._is_game_over = True
+                
+
+            if head2.get_position().equals(segment.get_position()):
+                self._is_game_over = True
+                
+
+        if head1.get_position().equals(head2.get_position()):
+                self._is_game_over = True
+                     
         
     def _handle_game_over(self, cast):
         """Shows the 'game over' message and turns the player1 and player2 white if the game is over.
@@ -76,7 +90,8 @@ class HandleCollisionsAction(Action):
 
             # game over message handling
             message = Actor1()
-            message.set_text("Game Over!")
+            message.set_text(f"Game Over!")
+            message.set_color(Color(255, 0, 0))
             message.set_position(position)
             cast.add_actor("messages", message)
 
