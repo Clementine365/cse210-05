@@ -47,26 +47,26 @@ class HandleCollisionsAction(Action):
         head2 = player2.get_segments()[0]
         segment2 = player2.get_segments()[1:]
     
-        # case of player1 or 2 collides with himself 
+         
         for segment in segment1:
+            # player1 collides with himself
             if head1.get_position().equals(segment.get_position()):
                 self._is_game_over = True
                
-
+            # player2 collides with player1
             if head2.get_position().equals(segment.get_position()):
                 self._is_game_over = True
                    
-
-        # case of player2 collides with himself or with player1
         for segment in segment2:
+            # player1 collides with player2
             if head1.get_position().equals(segment.get_position()):
                 self._is_game_over = True
                 
-
+            # player2 collides with himself
             if head2.get_position().equals(segment.get_position()):
                 self._is_game_over = True
                 
-
+        # player1 and player2 collides head on
         if head1.get_position().equals(head2.get_position()):
                 self._is_game_over = True
                      
