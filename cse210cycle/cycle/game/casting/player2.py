@@ -40,8 +40,8 @@ class Player2(Actor2):
     
     def _prepare_body(self):
         # initial setting of player2
-        x = int(constants.MAX_X - constants.CELL_SIZE*2)
-        y = int(constants.MAX_Y / 2)
+        x = int(constants.CELL_SIZE)
+        y = int(constants.MAX_Y - constants.CELL_SIZE*2)
 
         for i in range(constants.SNAKE_LENGTH):
             position = Point(x - i * constants.CELL_SIZE, y)

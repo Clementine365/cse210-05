@@ -14,11 +14,13 @@ class HandleCollisionsAction(Action):
 
     Attributes:
         _is_game_over (boolean): Whether or not the game is over.
+        _winner(string): tells who the winner is
     """
 
     def __init__(self):
         """Constructs a new HandleCollisionsAction."""
         self._is_game_over = False
+        self._winner = ""
         
 
     def execute(self, cast, script):
@@ -52,23 +54,28 @@ class HandleCollisionsAction(Action):
             # player1 collides with himself
             if head1.get_position().equals(segment.get_position()):
                 self._is_game_over = True
+                self._winner = "Player2 won!"
                
             # player2 collides with player1
             if head2.get_position().equals(segment.get_position()):
                 self._is_game_over = True
+                self._winner = "Player1 won!"
                    
         for segment in segment2:
             # player1 collides with player2
             if head1.get_position().equals(segment.get_position()):
                 self._is_game_over = True
+                self._winner = "Player2 won!"
                 
             # player2 collides with himself
             if head2.get_position().equals(segment.get_position()):
                 self._is_game_over = True
+                self._winner = "Player1 won!"
                 
         # player1 and player2 collides head on
         if head1.get_position().equals(head2.get_position()):
                 self._is_game_over = True
+                self._winner = "It's a tie!"
                      
         
     def _handle_game_over(self, cast):
@@ -89,8 +96,8 @@ class HandleCollisionsAction(Action):
             position = Point(x, y)
 
             # game over message handling
-            message = Actor1()
-            message.set_text(f"Game Over!")
+            message = Actor1() 
+            message.set_text(f"Game Over! {self._winner}")
             message.set_color(Color(255, 0, 0))
             message.set_position(position)
             cast.add_actor("messages", message)
