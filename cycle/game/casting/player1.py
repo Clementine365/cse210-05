@@ -17,7 +17,8 @@ class Player1(Actor1):
         super().__init__()
         self._segments = []
         self._prepare_body()
-
+        self._position = Point(1, 1)
+        self._velocity = Point(0, 0)
     def get_segments(self):
         """Gets player1's segments
         Returns:
